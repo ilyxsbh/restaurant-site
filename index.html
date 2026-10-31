@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#171512" />
+  <meta
+    name="description"
+    content="Découvrez notre cuisine préparée avec soin. Consultez le menu et commandez facilement sur WhatsApp."
+  />
+  <title>ILYXS — Une expérience culinaire unique</title>
+
+  <!-- Tailwind CSS via CDN: convenient for a prototype. For production, use a build setup. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#171512",
+            panel: "#211e19",
+            gold: "#e4ad58",
+            cream: "#f7f0e4",
+            whatsapp: "#25D366"
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            display: ["Georgia", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; }
+    h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; }
+    .hero-overlay {
+      background: linear-gradient(90deg, rgba(15,14,12,.91) 0%, rgba(15,14,12,.70) 48%, rgba(15,14,12,.18) 100%);
+    }
+    .menu-card { transition: transform .25s ease, border-color .25s ease; }
+    .menu-card:hover { transform: translateY(-5px); border-color: rgba(228,173,88,.65); }
+    .filter-btn[aria-pressed="true"] { background: #e4ad58; color: #171512; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-ink text-cream antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:p-3 focus:text-ink">
+    Aller au contenu
+  </a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-ink/95 backdrop-blur">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Navigation principale">
+      <a href="#accueil" class="text-xl font-bold tracking-[.22em] text-gold" aria-label="ILYXS, accueil">ILYXS<span class="text-cream">.</span></a>
+
+      <button id="menu-toggle" class="rounded-lg border border-white/15 px-3 py-2 text-sm md:hidden"
+        aria-expanded="false" aria-controls="nav-links">Menu</button>
+
+      <div id="nav-links" class="hidden absolute left-0 right-0 top-full flex-col gap-5 border-b border-white/10 bg-ink p-5 md:static md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0">
+        <a class="nav-link text-sm text-white/75 hover:text-gold" href="#accueil">Accueil</a>
+        <a class="nav-link text-sm text-white/75 hover:text-gold" href="#menu">Notre menu</a>
+        <a class="nav-link text-sm text-white/75 hover:text-gold" href="#apropos">À propos</a>
+        <a class="nav-link text-sm text-white/75 hover:text-gold" href="#avis">Avis</a>
+        <a class="nav-link text-sm text-white/75 hover:text-gold" href="#contact">Contact</a>
+        <a href="https://wa.me/212620036314?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande."
+          target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-sm font-bold text-ink transition hover:brightness-110">
+          <span aria-hidden="true">✆</span> Commander via WhatsApp
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="accueil" class="relative flex min-h-[78vh] items-center overflow-hidden">
+      <img
+        class="absolute inset-0 h-full w-full object-cover"
+        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85"
+        alt=""
+        fetchpriority="high"
+      />
+      <div class="hero-overlay absolute inset-0"></div>
+      <div class="relative mx-auto w-full max-w-7xl px-5 py-24 lg:px-8">
+        <p class="mb-5 text-xs font-bold uppercase tracking-[.3em] text-gold">Cuisine généreuse · Accueil chaleureux</p>
+        <h1 class="max-w-3xl text-5xl font-semibold leading-tight sm:text-6xl lg:text-7xl">
+          Des saveurs authentiques,<br /><span class="text-gold">à partager.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-base leading-7 text-white/75 sm:text-lg">
+          Une cuisine préparée avec passion, des ingrédients choisis avec soin et des moments qui donnent envie de revenir.
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="#menu" class="rounded-full bg-gold px-7 py-4 text-center font-bold text-ink transition hover:bg-amber-300">
+            Consulter le menu
+          </a>
+          <a href="https://wa.me/212620036314?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande."
+            target="_blank" rel="noopener noreferrer"
+            class="rounded-full border border-white/40 px-7 py-4 text-center font-bold text-white transition hover:border-whatsapp hover:bg-whatsapp hover:text-ink">
+            Commander sur WhatsApp
+          </a>
+        </div>
+        <p class="mt-8 text-sm text-white/60">Sur place · À emporter · Commande directe</p>
+      </div>
+    </section>
+
+    <!-- Intro strip -->
+    <section class="border-y border-white/10 bg-panel">
+      <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-5 py-7 text-center sm:grid-cols-3 lg:px-8">
+        <p><span class="text-gold">✦</span> Préparé avec soin</p>
+        <p><span class="text-gold">✦</span> Des saveurs à découvrir</p>
+        <p><span class="text-gold">✦</span> Commande simple sur WhatsApp</p>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-xs font-bold uppercase tracking-[.3em] text-gold">À la carte</p>
+        <h2 class="mt-3 text-4xl sm:text-5xl">Notre menu</h2>
+        <p class="mt-4 leading-7 text-white/65">Quelques suggestions pour vous mettre en appétit. Les plats et prix ci-dessous sont des exemples à remplacer.</p>
+      </div>
+
+      <div class="mt-9 flex flex-wrap justify-center gap-2" role="group" aria-label="Filtrer le menu par catégorie">
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Tous" aria-pressed="true">Tout</button>
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Entrées" aria-pressed="false">Entrées</button>
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Plats principaux" aria-pressed="false">Plats principaux</button>
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Desserts" aria-pressed="false">Desserts</button>
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Boissons" aria-pressed="false">Boissons</button>
+        <button class="filter-btn rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-gold" data-filter="Spécialités" aria-pressed="false">Spécialités</button>
+      </div>
+
+      <div id="menu-grid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Sample cards: replace names, descriptions, prices, and photos with the real menu. -->
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="apropos" class="bg-panel">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 md:grid-cols-2 lg:px-8">
+        <div class="relative">
+          <img class="h-[420px] w-full rounded-2xl object-cover"
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=80"
+            alt="Ambiance chaleureuse d'un restaurant" loading="lazy" />
+          <div class="absolute -bottom-5 -right-3 rounded-xl bg-gold px-5 py-4 text-sm font-bold text-ink shadow-xl">
+            Fait avec passion
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[.3em] text-gold">Notre histoire</p>
+          <h2 class="mt-3 text-4xl leading-tight sm:text-5xl">Le goût des bonnes choses.</h2>
+          <p class="mt-6 leading-7 text-white/70">
+            Chez ILYXS, nous croyons qu’un bon repas commence par de bons ingrédients et se savoure encore mieux dans une ambiance accueillante.
+            Notre équipe met son savoir-faire et sa passion au service d’une cuisine généreuse, préparée avec attention.
+          </p>
+          <p class="mt-4 leading-7 text-white/70">
+            Venez découvrir notre univers, partager un repas et créer de beaux souvenirs autour de la table.
+          </p>
+          <a href="#contact" class="mt-7 inline-flex rounded-full border border-gold px-6 py-3 font-semibold text-gold transition hover:bg-gold hover:text-ink">
+            Nous rendre visite
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews: replace these illustrative quotes with verified customer reviews before publishing. -->
+    <section id="avis" class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase tracking-[.3em] text-gold">Vos retours</p>
+        <h2 class="mt-3 text-4xl sm:text-5xl">Ils en parlent</h2>
+        <p class="mt-4 text-sm text-white/55">Avis d’exemple — remplacez par des témoignages vérifiés avant publication.</p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="rounded-2xl border border-white/10 bg-panel p-6">
+          <p class="text-gold" aria-label="5 étoiles">★★★★★</p><p class="mt-4 leading-7 text-white/75">« Un accueil chaleureux et un repas plein de saveurs. »</p><p class="mt-5 text-sm font-semibold">Client·e — exemple</p>
+        </article>
+        <article class="rounded-2xl border border-white/10 bg-panel p-6">
+          <p class="text-gold" aria-label="5 étoiles">★★★★★</p><p class="mt-4 leading-7 text-white/75">« Une belle découverte, nous reviendrons avec plaisir. »</p><p class="mt-5 text-sm font-semibold">Client·e — exemple</p>
+        </article>
+        <article class="rounded-2xl border border-white/10 bg-panel p-6">
+          <p class="text-gold" aria-label="5 étoiles">★★★★★</p><p class="mt-4 leading-7 text-white/75">« Des plats généreux et une ambiance très agréable. »</p><p class="mt-5 text-sm font-semibold">Client·e — exemple</p>
+        </article>
+        <article class="rounded-2xl border border-white/10 bg-panel p-6">
+          <p class="text-gold" aria-label="5 étoiles">★★★★★</p><p class="mt-4 leading-7 text-white/75">« La commande était simple et le repas délicieux. »</p><p class="mt-5 text-sm font-semibold">Client·e — exemple</p>
+        </article>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl border border-white/10 bg-panel p-7 sm:flex-row">
+        <div>
+          <p class="text-lg font-semibold">Suivez-nous sur Instagram</p>
+          <p class="mt-1 text-white/60">Découvrez nos plats et notre actualité.</p>
+        </div>
+        <a href="https://www.instagram.com/ilyxs.bh" target="_blank" rel="noopener noreferrer"
+          class="rounded-full border border-gold px-6 py-3 font-semibold text-gold transition hover:bg-gold hover:text-ink">
+          @ilyxs.bh ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact & location -->
+    <section id="contact" class="bg-panel">
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <div class="text-center">
+          <p class="text-xs font-bold uppercase tracking-[.3em] text-gold">Nous trouver</p>
+          <h2 class="mt-3 text-4xl sm:text-5xl">À bientôt chez nous</h2>
+          <p class="mt-4 text-white/65">Adresse et horaires à confirmer avant publication.</p>
+        </div>
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-ink p-7">
+            <h3 class="text-2xl">Informations pratiques</h3>
+            <div class="mt-6 space-y-5 text-white/70">
+              <p><span class="mr-3 text-gold">⌖</span><strong class="text-white">Adresse :</strong> À renseigner, Maroc</p>
+              <p><span class="mr-3 text-gold">◷</span><strong class="text-white">Horaires :</strong> À confirmer</p>
+              <p><span class="mr-3 text-gold">✆</span><strong class="text-white">Téléphone :</strong> <a class="hover:text-gold" href="tel:+212620036314">+212 620 036 314</a></p>
+              <p><span class="mr-3 text-gold">⌁</span>Sur place et à emporter — livraison à confirmer.</p>
+            </div>
+            <a href="https://wa.me/212620036314?text=Bonjour%2C%20je%20souhaite%20obtenir%20plus%20d%27informations."
+              target="_blank" rel="noopener noreferrer"
+              class="mt-8 inline-flex rounded-full bg-whatsapp px-6 py-3 font-bold text-ink transition hover:brightness-110">
+              Nous contacter sur WhatsApp
+            </a>
+          </div>
+          <div class="min-h-[320px] overflow-hidden rounded-2xl border border-white/10 bg-ink">
+            <!-- Replace the map query with the verified restaurant address or Google Maps embed URL. -->
+            <iframe
+              title="Carte : emplacement du restaurant à renseigner"
+              src="https://www.google.com/maps?q=Morocco&output=embed"
+              class="h-full min-h-[320px] w-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-ink">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <div>
+        <a href="#accueil" class="font-bold tracking-[.2em] text-gold">ILYXS.</a>
+        <p class="mt-2 text-sm text-white/50">Une expérience culinaire unique.</p>
+      </div>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/65">
+        <a class="hover:text-gold" href="#menu">Menu</a>
+        <a class="hover:text-gold" href="#apropos">À propos</a>
+        <a class="hover:text-gold" href="#contact">Contact</a>
+        <a class="hover:text-gold" href="https://www.instagram.com/ilyxs.bh" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="hover:text-gold" href="https://wa.me/212620036314" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <p class="text-xs text-white/40">© <span id="year"></span> ILYXS. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile floating actions -->
+  <div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-white/10 bg-ink/95 p-3 backdrop-blur md:hidden">
+    <a href="https://wa.me/212620036314?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande."
+      target="_blank" rel="noopener noreferrer"
+      class="rounded-full bg-whatsapp px-3 py-3 text-center text-sm font-bold text-ink">Commander</a>
+    <a href="https://www.instagram.com/ilyxs.bh" target="_blank" rel="noopener noreferrer"
+      class="rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 px-3 py-3 text-center text-sm font-bold text-white">Instagram</a>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = "212620036314";
+
+    // Replace these sample items and prices with the restaurant's confirmed menu.
+    const dishes = [
+      {
+        name: "Salade fraîcheur",
+        category: "Entrées",
+        description: "Légumes frais, herbes aromatiques et vinaigrette maison.",
+        price: 45,
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Soupe du jour",
+        category: "Entrées",
+        description: "Une soupe réconfortante préparée selon l’inspiration du chef.",
+        price: 35,
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Poulet grillé",
+        category: "Plats principaux",
+        description: "Poulet mariné, légumes de saison et accompagnement du jour.",
+        price: 95,
+        image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Pâtes crémeuses",
+        category: "Plats principaux",
+        description: "Pâtes, sauce onctueuse, parmesan et herbes fraîches.",
+        price: 80,
+        image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Spécialité du chef",
+        category: "Spécialités",
+        description: "Une création généreuse, inspirée des produits du moment.",
+        price: 120,
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Dessert maison",
+        category: "Desserts",
+        description: "Une douceur du jour préparée avec soin.",
+        price: 40,
+        image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Thé à la menthe",
+        category: "Boissons",
+        description: "Thé parfumé à la menthe, servi chaud.",
+        price: 20,
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Jus frais",
+        category: "Boissons",
+        description: "Jus de fruits frais — disponibilité selon la saison.",
+        price: 30,
+        image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    const menuGrid = document.getElementById("menu-grid");
+
+    function makeWhatsAppUrl(dishName) {
+      const message = `Bonjour, je souhaite commander : ${dishName}.`;
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
+
+    function renderMenu(category = "Tous") {
+      const filtered = category === "Tous"
+        ? dishes
+        : dishes.filter((dish) => dish.category === category);
+
+      menuGrid.innerHTML = filtered.map((dish) => `
+        <article class="menu-card overflow-hidden rounded-2xl border border-white/10 bg-panel">
+          <img src="${dish.image}" alt="${dish.name}" class="h-52 w-full object-cover" loading="lazy" />
+          <div class="p-5">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-gold">${dish.category}</p>
+                <h3 class="mt-2 text-2xl">${dish.name}</h3>
+              </div>
+              <p class="shrink-0 font-bold text-gold">${dish.price} MAD</p>
+            </div>
+            <p class="mt-3 min-h-12 text-sm leading-6 text-white/60">${dish.description}</p>
+            <a href="${makeWhatsAppUrl(dish.name)}" target="_blank" rel="noopener noreferrer"
+              class="mt-5 block rounded-full border border-white/20 px-5 py-3 text-center text-sm font-bold transition hover:border-whatsapp hover:bg-whatsapp hover:text-ink">
+              Commander ce plat
+            </a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    document.querySelectorAll(".filter-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach((item) => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        renderMenu(button.dataset.filter);
+      });
+    });
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+      navLinks.classList.toggle("hidden", expanded);
+      navLinks.classList.toggle("flex", !expanded);
+    });
+
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.add("hidden");
+        navLinks.classList.remove("flex");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderMenu();
+  </script>
+</body>
+</html>
